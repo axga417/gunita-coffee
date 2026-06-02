@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gunita Coffee - Cart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+
+    <div class="logo" onclick="openLogo()">
+        <img src="{{ url_for('static', filename='image/coffee-logo.png') }}"
+             alt="Gunita Coffee Logo">
+        <span>Gunita Coffee</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+
+    </div>
+
+</nav>
+
+<!-- ================= TITLE ================= -->
+<h2 class="title">
+        <i class="fa-solid fa-receipt"></i> Your Order Receipt
+    </h2>
+
+<!-- ================= CART ================= -->
+<div class="cart-container receipt">
+
+    {% if cart|length == 0 %}
+        <div class="empty">
+
+    <i class="fa-solid fa-bag-shopping"></i>
+    <p>Your Cart is Empty</p>
+
+    </div>
+    {% else %}
+
+        {% for item in cart %}
+        <div class="cart-item">
+
+            <div class="item-info">
+
+                <h3>{{ item.name }}</h3>
+
+                <p>Price: ₱{{ item.price }}</p>
+
+                <!-- ================= QTY CONTROLS ================= -->
+                <div class="qty-controls">
+
+                    <a href="/decrease/{{ item.id }}" class="qty-btn">−</a>
+
+                    <span class="qty">{{ item.qty }}</span>
+
+                    <a href="/increase/{{ item.id }}" class="qty-btn">+</a>
+
+                </div>
+
+                <!-- ITEM TOTAL -->
+                <p class="item-total">
+                    Item Total: ₱{{ item.price * item.qty }}
+                </p>
+
+            </div>
+
+            <!-- REMOVE BUTTON -->
+            <a class="remove-btn" href="/remove/{{ item.id }}">
+                Remove
+            </a>
+
+        </div>
+        {% endfor %}
+
+        <hr>
+
+        <!-- TOTAL -->
+        <div class="cart-total">
+            <h2>💰 Total: ₱{{ total }}</h2>
+        </div>
+
+        <!-- CHECKOUT -->
+        <form action="/checkout" method="POST">
+            <button class="checkout-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Checkout Your Order
+
+            </button>
+        </form>
+
+    {% endif %}
+
+</div>
+
+<!-- ================= LOGO MODAL ================= -->
+<div id="logoModal" class="modal">
+
+    <span class="close" onclick="closeLogo()">&times;</span>
+
+    <img class="modal-content"
+         src="{{ url_for('static', filename='image/coffee-logo.png') }}"
+         alt="Big Logo">
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+    <!-- BRAND NAME -->
+    <h2>Gunita Coffee</h2>
+
+    <!-- SHORT DESCRIPTION -->
+    <p>
+        May Alaala sa Bawat Timpla.
+    </p>
+
+    <!-- FOOTER LINKS -->
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social-icons">
+
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <p class="copyright">
+        © 2026 Gunita Coffee • All Rights Reserved
+    </p>
+
+</footer>
+</body>
+</html>

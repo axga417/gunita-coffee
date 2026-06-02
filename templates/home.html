@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gunita Coffee</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+
+    <div class="logo" onclick="openLogo()">
+        <img src="{{ url_for('static', filename='image/coffee-logo.png') }}"
+             alt="Gunita Coffee Logo">
+        <span>Gunita Coffee</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart" class="cart-link">
+             Cart
+            {% if cart_count %}
+            <span class="cart-badge">{{ cart_count }}</span>
+        {% endif %}
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1 class="hero-title">
+            <span class="welcome">Welcome to</span>
+            <span class="brand">Gunita Coffee</span>
+        </h1>
+
+        <p class="tagline">“May Alaala sa Bawat Timpla.”</p>
+
+        <button onclick="location.href='/menu'">
+            Order Now
+        </button>
+
+    </div>
+</section>
+
+<!-- ================= CATEGORY SECTION ================= -->
+<section class="menu-categories">
+
+    <div class="brand-story-inline">
+        <p class="brand-text">
+            At Gunita Coffee, every cup brings back quiet memories—of slow mornings, shared laughter, and moments that
+            linger in the heart. Crafted with warmth and care, each sip feels like coming home to something familiar, comforting, and beautifully remembered.
+        </p>
+    </div>
+
+    <h2 class="section-title">Gunita Menu</h2>
+
+    <div class="menu-grid">
+
+        <!-- COFFEE -->
+        <div class="menu-card">
+
+            <img src="{{ url_for('static', filename='image/coffee.jpg') }}" alt="Coffee Drinks">
+
+            <h3>Coffee Drinks</h3>
+
+            <p>
+                <span class="quote">“Matapang na timpla, malambing na alaala.”</span><br>
+                Aromatic coffee blends inspired by Filipino mornings.
+            </p>
+
+            <button onclick="location.href='/menu#coffee'">
+                Explore Coffee ☕
+            </button>
+
+        </div>
+
+        <!-- FRAPPE -->
+        <div class="menu-card">
+
+            <img src="{{ url_for('static', filename='image/frappe.jpg') }}" alt="Frappe Drinks">
+
+            <h3>Frappe Drinks</h3>
+
+            <p>
+                <span class="quote">“Preskong lunas sa init ng araw.”</span><br>
+                Sweet and creamy refreshers for peaceful moments.
+            </p>
+
+            <button onclick="location.href='/menu#frappe'">
+                Explore Frappes 🧊
+            </button>
+
+        </div>
+
+        <!-- PASTRIES -->
+        <div class="menu-card">
+
+            <img src="{{ url_for('static', filename='image/pastries.jpg') }}" alt="Pastries">
+
+            <h3>Pastries</h3>
+
+            <p>
+                <span class="quote">“Mainit na tinapay, may kasamang kwento.”</span><br>
+                Freshly baked treats that feel like home.
+            </p>
+
+            <button onclick="location.href='/menu#pastries'">
+                Explore Pastries 🥐
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= LOGO MODAL ================= -->
+<div id="logoModal" class="modal">
+
+    <span class="close" onclick="closeLogo()">&times;</span>
+
+    <img class="modal-content"
+         src="{{ url_for('static', filename='image/coffee-logo.png') }}"
+         alt="Big Logo">
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+    <!-- BRAND NAME -->
+    <h2>Gunita Coffee</h2>
+
+    <!-- SHORT DESCRIPTION -->
+    <p>
+        May Alaala sa Bawat Timpla.
+    </p>
+
+    <!-- FOOTER LINKS -->
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social-icons">
+
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <p class="copyright">
+        © 2026 Gunita Coffee • All Rights Reserved
+    </p>
+
+</footer>
+</body>
+</html>

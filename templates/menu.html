@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gunita Coffee</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+</head>
+
+<body class="menu-body"
+      style="background-image: url('{{ url_for('static', filename='image/background.jpg') }}');">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+
+    <div class="logo" onclick="openLogo()">
+        <img src="{{ url_for('static', filename='image/coffee-logo.png') }}" alt="Gunita Coffee Logo">
+        <span>Gunita Coffee</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart" class="cart-link">
+            Cart
+            {% if cart_count %}
+             <span class="cart-badge">{{ cart_count }}</span>
+            {% endif %}
+        </a>
+    </div>
+
+</nav>
+
+<!-- ================= TITLE ================= -->
+<h1 class="menu-title">Gunita Coffee Menu</h1>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function scrollCarousel(id, amount) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.scrollBy({
+        left: amount,
+        behavior: "smooth"
+    });
+}
+</script>
+
+<!-- ================= COFFEE ================= -->
+<section id="coffee">
+    <h2><i class="fa-solid fa-mug-hot"></i> Coffee Drinks</h2>
+
+    <div class="carousel-wrapper">
+
+        <button class="arrow left" onclick="scrollCarousel('coffee-carousel', -300)">&#10094;</button>
+
+        <div class="carousel" id="coffee-carousel">
+
+            {% for item in menu['coffee'] %}
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='image/' + item.img) }}" alt="{{ item.name }}">
+
+                <h3>{{ item.name }}</h3>
+                <p class="tagline">{{ item.tagline }}</p>
+                <p>₱{{ item.price }}</p>
+
+                <a href="/add/coffee/{{ item.id }}">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="arrow right" onclick="scrollCarousel('coffee-carousel', 300)">&#10095;</button>
+
+    </div>
+</section>
+
+<!-- ================= FRAPPE ================= -->
+<section id="frappe">
+    <h2><i class="fa-solid fa-snowflake"></i> Frappes</h2>
+
+    <div class="carousel-wrapper">
+
+        <button class="arrow left" onclick="scrollCarousel('frappe-carousel', -300)">&#10094;</button>
+
+        <div class="carousel" id="frappe-carousel">
+
+            {% for item in menu['frappe'] %}
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='image/' + item.img) }}" alt="{{ item.name }}">
+
+                <h3>{{ item.name }}</h3>
+                <p class="tagline">{{ item.tagline }}</p>
+                <p>₱{{ item.price }}</p>
+
+                <a href="/add/frappe/{{ item.id }}">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="arrow right" onclick="scrollCarousel('frappe-carousel', 300)">&#10095;</button>
+
+    </div>
+</section>
+
+<!-- ================= PASTRIES ================= -->
+<section id="pastries">
+    <h2><i class="fa-solid fa-bread-slice"></i> Pastries</h2>
+
+    <div class="carousel-wrapper">
+
+        <button class="arrow left" onclick="scrollCarousel('pastries-carousel', -300)">&#10094;</button>
+
+        <div class="carousel" id="pastries-carousel">
+
+            {% for item in menu['pastries'] %}
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='image/' + item.img) }}" alt="{{ item.name }}">
+
+                <h3>{{ item.name }}</h3>
+                <p class="tagline">{{ item.tagline }}</p>
+                <p>₱{{ item.price }}</p>
+
+                <a href="/add/pastries/{{ item.id }}">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="arrow right" onclick="scrollCarousel('pastries-carousel', 300)">&#10095;</button>
+
+    </div>
+</section>
+
+<!-- ================= LOGO MODAL ================= -->
+<div id="logoModal" class="modal">
+    <span class="close" onclick="closeLogo()">&times;</span>
+
+    <img class="modal-content"
+         src="{{ url_for('static', filename='image/coffee-logo.png') }}"
+         alt="Big Logo">
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+    <!-- BRAND NAME -->
+    <h2>Gunita Coffee</h2>
+
+    <!-- SHORT DESCRIPTION -->
+    <p>
+        May Alaala sa Bawat Timpla.
+    </p>
+
+    <!-- FOOTER LINKS -->
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social-icons">
+
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <p class="copyright">
+        © 2026 Gunita Coffee • All Rights Reserved
+    </p>
+
+</footer>
+</body>
+</html>
